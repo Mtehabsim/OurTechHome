@@ -1,0 +1,60 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+<!--------------------------------------
+Main
+--------------------------------------->
+<div class="container mt-6 mb-6 ml-14 mr-4">
+	<div class="ml-6 mr-2">
+		<div class="col-md-10">
+			<h5 class="font-weight-bold spanborder"><span>Categories</span></h5>
+			<div class="card border-0 mb-5 box-shadow">
+				<div style="background-image: url({% static 'img/demo/homes.png' %}); height: 400px; background-size: cover; background-repeat: no-repeat;">
+				</div>
+				<br>
+				{% for category in object_list%}
+
+
+				<div class="row">
+
+						<div class=" col mb-3 mr-0 pl-3 d-flex">
+							<div class="col-lg-8">
+								<h2 class="mb-2 h2 font-weight-bold">
+								<a class="text-dark" href="{% url 'category-page' category.pk %}">{{ category.name }}</a>
+								</h2>
+								<small class="d-block"><a class="text-muted" href="./author.html">{{ category.info }}</a></small>
+							</div>
+								<div class="col col-lg-8 pl-6 ml-6 d-flex mb-3 " style="float:right;">
+							<img height="100%" width="350px" src="{{category.picture.url}}">
+								</div>
+						</div>
+				</div>
+					{%endfor%}
+			</div>
+		</div>
+			{% if not user.is_authenticated%}
+			<div class="container ml-6 mr-3">
+	<h5 class="font-weight-bold spanborder"><span></span></h5>
+
+			<div class="border p-5 bg-lightblue">
+				<div class="row justify-content-between">
+					<div class="col-md-5 mb-2 mb-md-0">
+						<h5 class="font-weight-bold secondfont">Become a member</h5>
+					</div>
+					<div class="col-md-7">
+						<div class="row">
+
+							<div class="col-md-12 mt-2">
+								<a href="{% url 'signup' %}"><button type="submit" class="btn btn-success btn-block">Register</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{%endif%}
+
+		</div>
+	</div>
+</div>
+<!-- End Main -->
+{% endblock content%}

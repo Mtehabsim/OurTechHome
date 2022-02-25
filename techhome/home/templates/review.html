@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+<!--------------------------------------
+Main
+--------------------------------------->
+{%if user.author.verified%}
+<div class="container mt-6 mb-6 ml-14 mr-4">
+	<div >
+		<div class="col-md-10">
+			<h5 class="font-weight-bold spanborder"><span>Categories</span></h5>
+			<div class="card border-0 mb-5 box-shadow">
+				<div style="background-image: url({% static 'img/demo/homes.png' %}); height: 400px; background-size: cover; background-repeat: no-repeat;">
+				</div>
+				<br>
+				{% for category in object_list%}
+
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="flex-md-row mb-4 box-shadow h-xl-300">
+						<div class="mb-3 d-flex align-items-center">
+							<img height="150" src="{{category.picture.url}}">
+							<div class="pl-3">
+								<h2 class="mb-2 h2 font-weight-bold">
+								<a class="text-dark" href="{% url 'review-posts' category.pk %}">{{ category.name }}</a>
+								</h2>
+								<small class="d-block"><a class="text-muted" href="./author.html">{{ category.info }}</a></small>
+							</div>
+						</div>
+						{%endfor%}
+					</div>
+				</div>
+			</div>
+            </div>
+		</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+<!-- End Main -->
+{%else%} Not allowed
+{%endif%}
+
+{% endblock content%}

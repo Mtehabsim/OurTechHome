@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+
+<div class = "container">
+    <br>
+    <h6 class="font-weight-bold spanborder"><span>Our Great Authors</span></h6>
+{% for author in object_list %}
+
+    <div class="d-flex align-items-center">
+        <img class="rounded-circle" src="{{author.picture.url}}" style="width: 100px;height: 100px;object-fit: cover;">
+        <a href="{%url 'profile' author.user.profile.pk %}"><small class="ml-2 h3">{{ author.name }}
+        </small></a>
+    </div>
+    <br>
+{% endfor %}
+    </div>
+{%endblock content%}

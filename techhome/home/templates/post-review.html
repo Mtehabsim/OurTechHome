@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+{%if user.author.verified%}
+
+<div class="container ml-14 mr-0">
+	<div class="row justify-content-between">
+
+		<div class="col-md-8 ">
+			<h5 class="font-weight-bold spanborder"><span>All Unreviewed {{category.name}} posts</span></h5>
+			{% for post in object.post_set.all %}
+            {% if post.category == category %}
+            {%if not post.verified%}
+			<div class="mb-3 d-flex justify-content-between">
+				<div class="pr-3">
+					<h2 class="mb-1 h4 font-weight-bold">
+					<a class="text-dark" href="{% url 'article' post.pk %}">{{ post.title }}</a>
+					</h2>
+					<p>
+						{{post.content|slice:"65"|safe}}....
+					</p>
+					<div class="card-text text-muted small">
+						 {{post.writer}}
+					</div>
+					<small class="text-muted">{{post.date}}</small>
+				</div>
+
+			</div>
+            {%endif%}
+            {%endif%}
+			{%endfor%}
+		</div>
+	</div>
+</div>
+{%else%} Not allowed
+{%endif%}
+{% endblock content%}

@@ -1,0 +1,86 @@
+{% extends 'base.html'%}
+{% load static %}
+{%block title%}My profile{%endblock title%}
+{% block content%}
+<br><br>
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md">
+            <div class="border card p-3 py-4 text-black rounded-3" style="background-color: #D6D6E2;border-radius: 40px; " >
+                <div class="text-center "> <img style="width: 400px;height: 400px;object-fit: cover;" src="{{ profile.picture.url}}" class="img-fluid rounded-circle"> </div>
+                <div class="text-center mt-3">
+				{% if profile.user.author.verified %}
+				<span class="bg-secondary p-1 px-4 rounded text-white">Author</span>
+                    {%endif%}
+					<h2 class="mt-2 mb-0 ">{{ profile.user.first_name }} {{ profile.user.last_name }} </h2>
+
+                    <div class="px-4 mt-1">
+                        <p class="fonts">{{ profile.bio }} </p>
+                    </div>
+
+                    <div >
+                        <!-- Facebook -->
+                        {%if profile.facebook_url%}
+                        <a href="{{ profile.facebook_url }}"><i class="fab fa-facebook-f ml-1 mr-1"> Facebook</i></a>
+                        {%endif%}
+                        {%if profile.instagram_url%}
+                        <!-- Instagram -->
+                        <a href="{{ profile.instagram_url }}"><i class="fab fa-instagram ml-1 mr-1"> Instagram</i></a>
+                        {%endif%}
+                        {%if profile.linkedin_url%}
+                        <!-- Linkedin -->
+                        <a href="{{ profile.linkedin_url }}"><i class="fab fa-linkedin-in ml-1   mr-1"> LinkedIn</i></a>
+                        {%endif%}
+                    </div>
+                    <br>
+                    {%if profile.user.author.verified and user.is_authenticated %}
+                    <div class="buttons">
+                        <form action="{%url 'like_author' profile.pk%}" method="POST">
+						{% csrf_token%}
+
+						{% if not liked %}
+                            <button type="submit" name = "profile_id" value="{{profile.id}}"  class="btn btn-primary px-4 ms-3">Give this Author a Like</button>
+						{%else%}
+                            <button type="submit" name = "profile_id" value="{{profile.id}}" class="btn btn-outline-primary px-4 ms-3">Remove your Like</button>
+						{%endif%}
+							<br><p class="ml-3"><small class="text-success">{{total_likes}} </small>user liked this author</p>
+					</form>
+
+                    </div>
+                    {%endif%}
+
+                    {% if profile.user.author.verified %}
+                    <div class="col-md-4 pl-4">
+                    <h5 class="font-weight-bold spanborder"><span>{{profile.user}} Articles</span></h5>
+			<ol class="list-featured">
+                    {%for post in posts%}
+                    {%if post.writer.user == profile.user%}
+                    <li>
+				<span>
+					<h6 class="font-weight-bold">
+				<a href="{% url 'article' post.pk %}" class="text-dark">{{post.title}}</a>
+				</h6>
+
+				<p class="text-muted">
+					{{post.date}}
+				</p>
+				</span>
+				</li>
+                    {%endif%}
+                    {%endfor%}
+                    {%endif%}
+
+
+			</ol>
+		</div>
+	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock content%}

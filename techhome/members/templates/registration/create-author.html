@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+{% if user.is_authenticated%}
+<div class="col-lg-6 offset-lg-3 form-group">
+      <h2>Become an Author</h2>
+    <h4>By becoming an author, you will be able to post articles on our tech home, to give you this access we need to make sure you are trusted and informed person</h4>
+        <h4>so after pressing this button you will be asked to write an article, this article won't be viewed by anyone but the staff of our tech home</h4>
+    <h4>If we accepted your article, it will be viewed by public and you will have the access to post articles as much as you want</h4>
+    <h4>Why becoming an author in our tech home?</h4>
+    <ul>
+        <li>
+            Share your articles with millions of people
+        </li>
+        <li>
+            Help students to gain knowledge from your article
+        </li>
+        <li>
+            We are currently working on paining small thank you amounts to our authors, still working on it
+        </li>
+    </ul>
+      <form method='POST' enctype="multipart">
+        {% csrf_token %}
+          <span class="ml-2"></span>
+          {{ form.as_p }}
+        <button class="btn btn-primary ml-2"> Become an author </button>
+      </form>
+    <br>
+    <h6>Forget your password? <a href="{%url 'password'%}"> Change Password</a></h6>
+    </div>
+{%else%}
+Stop it, login
+{%endif%}
+{%endblock content%}
