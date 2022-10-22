@@ -29,7 +29,7 @@
 						{%endif%}
 						<form action="{%url 'like_post' post.pk%}" method="POST">
 						{% csrf_token%}
-
+						{% if user.is_authenticated%}
 						{% if not liked %}
 						<button type="submit" name = "post_id" value="{{post.id}}" class="btn btn-outline-primary btn-sm ml-3">Like</button>
 
@@ -37,7 +37,7 @@
 						<button  type="submit" name = "post_id" value="{{post.id}}" class="btn btn-danger btn-sm">Unlike</button>
 
 						{%endif%}
-
+						{%endif%}
 
 							<br><p class="ml-3"><small class="text-danger">{{total_likes}} </small>user liked it</p>
 					</form>
