@@ -9,6 +9,12 @@ from django.http import HttpResponseRedirect
 class ReviewCatPostView(DetailView):
     model = Category
     template_name = 'post-review.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        check = False
+        context['check'] = check
+
+        return context
 
 class ReviewPostView(ListView):
     model = Category

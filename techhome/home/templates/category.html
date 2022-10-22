@@ -4,14 +4,15 @@
 <!--------------------------------------
 Main
 --------------------------------------->
-<div class="container mt-6 mb-6 ml-14 mr-4">
+<div class="container mt-6 mb-6 ml-8 mr-4">
 	<div class="ml-6 mr-2">
-		<div class="col-md-10">
-			<h5 class="font-weight-bold spanborder"><span>Categories</span></h5>
+		<div class="col-md-8">
+
 			<div class="card border-0 mb-5 box-shadow">
-				<div style="background-image: url({% static 'img/demo/homes.png' %}); height: 400px; background-size: cover; background-repeat: no-repeat;">
+				<div class ="ml-5" style="background-image: url({% static 'img/demo/TECHHOME.jpg' %});  background-position: center 100%; height: 400px; background-repeat:no-repeat; ">
 				</div>
 				<br>
+				<h5 class="font-weight-bold spanborder"><span>Categories</span></h5>
 				{% for category in object_list%}
 
 
@@ -31,7 +32,7 @@ Main
 				</div>
 					{%endfor%}
 			</div>
-		</div>
+
 			{% if not user.is_authenticated%}
 			<div class="container ml-6 mr-3">
 	<h5 class="font-weight-bold spanborder"><span></span></h5>
@@ -46,6 +47,7 @@ Main
 
 							<div class="col-md-12 mt-2">
 								<a href="{% url 'signup' %}"><button type="submit" class="btn btn-success btn-block">Register</button></a>
+							</div>
 							</div>
 						</div>
 					</div>
