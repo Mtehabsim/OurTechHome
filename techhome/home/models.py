@@ -12,7 +12,7 @@ class Category(models.Model):
 
 class Author(models.Model):
 
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     picture = models.ImageField(null= True, blank= True,upload_to="images/")
     verified = models.BooleanField(default=False)

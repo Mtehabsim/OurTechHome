@@ -48,19 +48,19 @@ class CreateProfileView(CreateView):
 class ProfileView(DetailView):
     model = Profile
     template_name = 'registration/profile.html'
-
-
     def get_context_data(self, **kwargs):
         context = super(ProfileView,self).get_context_data(**kwargs)
         profile = get_object_or_404(Profile,id=self.kwargs['pk'])
         posts = Post.objects.all()
         pk = self.kwargs["pk"]
         liked = False
-        if profile.user.author.likes.filter(id=self.request.user.id).exists():
-            liked = True
-
-        total_likes = profile.user.author.total_likes()
-        context['total_likes'] = total_likes
+        try:
+            if profile.user.author.likes.filter(id=self.request.user.id).exists():
+                liked = True
+            total_likes = profile.user.author.total_likes()
+            context['total_likes'] = total_likes
+        except:
+            pass
         context['liked'] = liked
         context['profile'] = profile
         context['posts'] = posts

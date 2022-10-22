@@ -10,6 +10,7 @@
 			<h5 class="font-weight-bold spanborder"><span>All {{category.name}} posts</span></h5>
 			{% for post in object.post_set.all %}
             {% if post.category == category %}
+			{%if post.verified%}
 			<div class="mb-3 d-flex justify-content-between">
 				<div class="pr-3">
 					<h2 class="mb-1 h4 font-weight-bold">
@@ -25,6 +26,7 @@
 				</div>
 
 			</div>
+			{%endif%}
             {%endif%}
 			{%endfor%}
 		</div>

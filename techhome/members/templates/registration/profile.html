@@ -10,8 +10,10 @@
             <div class="border card p-3 py-4 text-black rounded-3" style="background-color: #D6D6E2;border-radius: 40px; " >
                 <div class="text-center "> <img style="width: 400px;height: 400px;object-fit: cover;" src="{{ profile.picture.url}}" class="img-fluid rounded-circle"> </div>
                 <div class="text-center mt-3">
+                {% if profile.user.author %}
 				{% if profile.user.author.verified %}
 				<span class="bg-secondary p-1 px-4 rounded text-white">Author</span>
+                    {%endif%}
                     {%endif%}
 					<h2 class="mt-2 mb-0 ">{{ profile.user.first_name }} {{ profile.user.last_name }} </h2>
 

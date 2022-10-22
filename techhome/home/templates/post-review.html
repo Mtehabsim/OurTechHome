@@ -8,9 +8,16 @@
 
 		<div class="col-md-8 ">
 			<h5 class="font-weight-bold spanborder"><span>All Unreviewed {{category.name}} posts</span></h5>
+			{% with a=1 %}
+
+
+
+
 			{% for post in object.post_set.all %}
+
             {% if post.category == category %}
-            {%if not post.verified%}
+            {%if not post.verified %}
+			{{ a|add:"1" }} # this is the changed code
 			<div class="mb-3 d-flex justify-content-between">
 				<div class="pr-3">
 					<h2 class="mb-1 h4 font-weight-bold">
@@ -29,6 +36,10 @@
             {%endif%}
             {%endif%}
 			{%endfor%}
+			{%if a == 1%}No posts to view
+			{%endif%}
+			{% endwith %}
+
 		</div>
 	</div>
 </div>
